@@ -6,22 +6,28 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-    strategy:
-      matrix:
-        os: [macos-latest]
-
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm install
-      - run: npm run dist
-      - name: Upload DMG Artifact
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build DMG
+        run: npm run dist
+      
+      - name: List dist folder contents (debug)
+        run: ls -la dist
+      
+      - name: Upload DMG artifact
         uses: actions/upload-artifact@v3
         with:
           name: mac-dmg
