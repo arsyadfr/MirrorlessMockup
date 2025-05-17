@@ -7,9 +7,9 @@
     "start": "electron .",
     "build": "electron-builder"
   },
-    "win": {
-      "target": "nsis"
-    },
+    "mac": {
+    "target": "dmg"
+  },
 
   "author": "Arsyad Faiz",
   "license": "1.0",
