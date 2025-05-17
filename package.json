@@ -17,7 +17,14 @@
   "build": {
     "appId": "com.arsyadfaiz.mirrorless",
     "productName": "MIRRORLESS",
-     "publish": "always",
+     "publish": [
+    {
+      "provider": "github",
+      "owner": "arsyadfr",
+      "repo": "MirrorlessMockup",
+      "publishAutoUpdate": true
+    }
+  ],
     "mac": {
       "target": "dmg"
     },
