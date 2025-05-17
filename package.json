@@ -1,22 +1,20 @@
 {
-  "name": "electron-quick-start",
+  "name": "MIRRORLESS",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Capture Without Limits.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+    "win": {
+      "target": "nsis"
+    },
+
+  "author": "Arsyad Faiz",
+  "license": "1.0",
   "devDependencies": {
-    "electron": "^35.1.2"
+    "electron": "^35.2.0",
+    "electron-builder": "^26.0.12"
   }
 }

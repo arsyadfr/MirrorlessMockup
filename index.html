@@ -1,19 +1,130 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+<!doctype html>
+<html lang="en">
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mirrorless.</title>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="keyboard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+<body id="content">
+
+</body>
+<script>
+  async function loadPage(page) {
+    const res = await fetch(`pages/${page}.html`);
+    const html = await res.text();
+    document.getElementById('content').innerHTML = html;
+    requestAnimationFrame(() => {
+      // Safe to manipulate or run logic now
+      if (document.getElementById('photostrip')) {
+        console.log('photostrip found');
+        var photostrip = 7
+        const cn = document.getElementById('photostrip')
+        for (let i = 1; i <= photostrip; i++) {
+          var child = document.createElement('img')
+          child.className = "ps"
+          child.src = `assets/ps${i}.png`
+          child.onclick = () => {
+            loadPage(`filterchoose`)
+          }
+          console.log('created')
+          cn.appendChild(child)
+        }
+      }
+        if (document.getElementById('sendx')) {
+          document.getElementById('text').innerText= storedValue
+        }
+      if (document.getElementById('fl')) {
+        console.log('filter found');
+        var photostrip = 5
+        const cn = document.getElementById('fl')
+        for (let i = 1; i <= photostrip; i++) {
+          var child = document.createElement('img')
+          child.className = "fs"
+          child.src = `assets/FILTER/f${i}.png`
+          child.onclick = () => {
+            loadPage(`photo`)
+          }
+          console.log('created')
+          cn.appendChild(child)
+        }
+      }
+    });
+       if (document.getElementById('custom')) {
+   if (typeof Keyboard !== "undefined") {
+      Keyboard.init()
+        Keyboard.open()
+         Keyboard._toggleCapsLock();
+         document.getElementById('ipt').focus()
+document.getElementById('kb').classList.toggle("keyboard__key--active", Keyboard.properties.capsLock);
+document.getElementById('kb').classList.add('cstk')
+    } else {
+      console.warn("Keyboard not defined yet!");
+    }
+    console.log('loaded')
+
+  }
+  }
+
+  loadPage('home');
+
+ async function starts() {
+  document.getElementById('photo').removeAttribute('style');
+  document.getElementById('str').style.display = 'none';
+
+  const count = document.getElementById('counter');
+  const beep = document.getElementById("beep");
+  const shutter = document.getElementById("shutter");
+  const photo = document.getElementById("photo");
+
+  let totaltime = 3;
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function countdown() {
+    count.removeAttribute('style');
+    for (let i = 3; i > 0; i--) {
+      count.innerText = i;
+      beep.currentTime = 0;
+      beep.play();
+      await sleep(1000);
+    }
+    count.innerText = '';
+    count.style.display = 'none';
+    shutter.currentTime = 0;
+    shutter.play();
+  }
+
+  
+  await sleep(1000);
+
+  await countdown();
+
+  await sleep(3500);
+
+  photo.setAttribute('src', 'assets/pxg.png');
+
+  await sleep(1000);
+
+  await countdown();
+ 
+  photo.onclick = () =>{
+     loadPage('notes');
+  }
+  photo.style.cursor= 'pointer'
+}
+
+   let storedValue = '';
+
+</script>
+ <script  src="Keyboard.js"></script>
 </html>
