@@ -10,6 +10,9 @@
     "mac": {
     "target": "dmg"
   },
+   "directories": {
+    "output": "dist"
+  }
 
   "author": "Arsyad Faiz",
   "license": "1.0",
