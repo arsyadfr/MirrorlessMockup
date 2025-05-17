@@ -8,17 +8,20 @@
     "build": "electron-builder --mac",
     "dist": "electron-builder --mac"
   },
-    "mac": {
-    "target": "dmg"
-  },
-   "directories": {
-    "output": "dist"
-  },
-
   "author": "Arsyad Faiz",
   "license": "1.0",
   "devDependencies": {
     "electron": "^35.2.0",
     "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.arsyadfaiz.mirrorless",
+    "productName": "MIRRORLESS",
+    "mac": {
+      "target": "dmg"
+    },
+    "directories": {
+      "output": "dist"
+    }
   }
 }
