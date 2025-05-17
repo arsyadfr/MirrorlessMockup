@@ -1,24 +1,21 @@
-name: Build macOS DMG
+name: Build Electron App
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build-mac:
-    runs-on: macos-latest
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
       - run: npm install
       - run: npm run dist
-      - name: Debug dist folder
-        run: ls -la dist
-      - uses: actions/upload-artifact@v3.1.2
-        with:
-          name: mac-dmg
-          path: dist/*.dmg
