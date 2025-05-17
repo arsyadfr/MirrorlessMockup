@@ -17,6 +17,7 @@
   "build": {
     "appId": "com.arsyadfaiz.mirrorless",
     "productName": "MIRRORLESS",
+     "publish": "always",
     "mac": {
       "target": "dmg"
     },
